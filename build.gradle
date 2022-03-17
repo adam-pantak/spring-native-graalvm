@@ -1,0 +1,39 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.experimental.aot' version '0.11.3'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenLocal()
+    maven { url 'https://repo.spring.io/release' }
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+bootBuildImage {
+    builder = "paketobuildpacks/builder:tiny"
+    environment = ["BP_NATIVE_IMAGE": "true"]
+    buildpacks = ["gcr.io/paketo-buildpacks/java-native-image:7.1.0"]
+}
