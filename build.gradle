@@ -20,11 +20,10 @@ repositories {
 
 
 dependencies {
+    implementation 'org.springframework:spring-web'
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.cloud:spring-cloud-function-adapter-aws:3.2.2'
-    implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux:3.2.2'
-    implementation 'org.reactivestreams:reactive-streams:1.0.3'
     implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
 

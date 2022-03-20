@@ -3,9 +3,11 @@ package com.pantak.lab.functions;
 import com.pantak.lab.model.Request;
 import com.pantak.lab.model.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
+@Component
 @Slf4j
 public class LambdaFunction implements Function<Request, Response> {
 
