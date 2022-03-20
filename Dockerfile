@@ -7,5 +7,3 @@ WORKDIR /app
 COPY . /app
 RUN ls
 RUN ./gradlew nativeCompile
-
-CMD ./build/native/nativeCompile/spring-native-graalvm

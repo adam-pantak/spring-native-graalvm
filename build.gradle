@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.springframework.experimental.aot' version '0.11.3'
+    id 'distribution'
     id 'java'
 }
 
@@ -20,9 +21,35 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.cloud:spring-cloud-function-adapter-aws:3.2.2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux:3.2.2'
+    implementation 'org.reactivestreams:reactive-streams:1.0.3'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+distributions {
+    main {
+        distributionBaseName = project.name
+        contents {
+            from('app/') {  // Contents of this directory are copied by default
+                dirMode = 0775
+                fileMode = 0775
+            }
+            into '/'
+            from('src/shell/native') {  // Contents of this directory are copied by default
+                dirMode = 0775
+                fileMode = 0775
+            }
+            into '/'
+        }
+    }
 }
 
 test {
